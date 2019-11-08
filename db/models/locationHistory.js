@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const LocationHistory = db.define('locationHistory', {
+const LocationHistory = db.define('location_history', {
   lat: {
     type: Sequelize.STRING
   },
