@@ -18,4 +18,4 @@ const SensorData = db.define('sensor_data', {
   }
 })
 
-export default SensorData
+module.exports = SensorData

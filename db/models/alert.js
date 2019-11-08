@@ -7,4 +7,4 @@ const Alert = db.define('alert', {
   }
 })
 
-export default Alert
+module.exports = Alert

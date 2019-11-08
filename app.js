@@ -3,8 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
+var db = require('./db')
+var sensorRouter = require('./routes/sensor_logs');
 var usersRouter = require('./routes/users');
 
 var app = express();
@@ -19,13 +19,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/sensors', sensorRouter);
 app.use('/users', usersRouter);
+
+/* GET home page. */
+app.get('/', function (req, res, next) {
+  res.render('index', { title: 'Solidarity' });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+const syncDb = () => db.sync()
+
+const bootApp = async () => {
+  await syncDb()
+}
+
+bootApp()
 
 // error handler
 app.use(function(err, req, res, next) {

@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
-/* GET users listing. */
+const User = require('../db/models/user')
+const ResponderProfile = require('../db/models/responderProfile')
 
-router.get('/users', function(req, res, next) {
+
+
+router.get('/', function (req, res, next) {
   try {
     const users = User.findAll();
     res.json(users);
@@ -11,13 +14,31 @@ router.get('/users', function(req, res, next) {
   }
 });
 
-router.get('/users/:id', function(req, res, next) {
+router.post('/', async (req, res, next) => {
   try {
-    const userID = req.params.id;
-    const findUser = User.findByPk(userID);
+    const user = User.create(req.body);
+    if (user) {
+      res.status(201).send("user created.");
+    } else {
+      res.status(500).send("User could not be created.")
+    }
+  } catch (err) {
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      res.status(401).send('User already exists')
+    } else {
+      next(err)
+    }
+    next(err)
+  }
+})
 
-    if (findUser) {
-      res.sendStatus(201).json(findUser);
+router.get('/:id', function(req, res, next) {
+  try {
+    const userId = req.params.id;
+    const user = User.findByPk(userId);
+
+    if (user) {
+      res.sendStatus(201).json(user);
     } else {
       res.sendStatus(404).end();
     }
@@ -26,4 +47,23 @@ router.get('/users/:id', function(req, res, next) {
     next(err);
   }
 });
+
+router.put('/:id/updatehealth', async (req, res, next) => {
+  try {
+    const newUserData = await ResponderProfile.update(
+      { heartRate: req.body.heartRate },
+      { where: req.params.id }
+    )
+    if (newUserData) {
+      res.sendStatus(201).json(user);
+    } else {
+      res.sendStatus(404).end();
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+
+
 module.exports = router;
