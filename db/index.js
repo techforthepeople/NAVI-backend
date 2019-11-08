@@ -1,5 +1,5 @@
 const Alert = require("./models/alert.js")
-const Group = require("./models/groups.js")
+const Group = require("./models/group.js")
 const LocationHistory = require("./models/locationHistory.js")
 const ResponderProfile = require("./models/responderProfile.js")
 const SensorData = require("./models/sensorData.js")
@@ -9,27 +9,24 @@ const db = require('./db')
 
 
 Group.hasMany(User)
-User.belongTo(Group)
+User.belongsTo(Group)
 
 User.hasOne(SensorData)
-SensorData.belongTo(User)
+SensorData.belongsTo(User)
 
 User.hasOne(ResponderProfile)
-ResponderProfile.belongTo(User)
+ResponderProfile.belongsTo(User)
 
 User.hasMany(LocationHistory)
-LocationHistory.belongTo(User)
+LocationHistory.belongsTo(User)
 
-User.hasMany(Alert, {through: 'UserToAlert'})
-
-
+User.belongsToMany(Alert, {through: 'UserToAlert'})
 
 
 
 
 
 
-// register models
-require('./models')
+
 
 module.exports = db

@@ -7,4 +7,4 @@ const Group = db.define('group', {
   }
 })
 
-export default Group
+module.exports = Group
