@@ -17,11 +17,11 @@ router.get('/users', function (req, res, next) {
 
 router.get('/users/:id', function(req, res, next) {
   try {
-    const userID = req.params.id;
-    const findUser = User.findByPk(userID);
+    const userId = req.params.id;
+    const user = User.findByPk(userId);
 
-    if (findUser) {
-      res.sendStatus(201).json(findUser);
+    if (user) {
+      res.sendStatus(201).json(user);
     } else {
       res.sendStatus(404).end();
     }
@@ -30,6 +30,22 @@ router.get('/users/:id', function(req, res, next) {
     next(err);
   }
 });
+
+router.put('/users/:id/updatehealth', async (req, res, next) => {
+  try {
+    const newUserData = await ResponderProfile.update(
+      { heartRate: req.body.heartRate },
+      { where: req.params.id }
+    )
+    if (newUserData) {
+      res.sendStatus(201).json(user);
+    } else {
+      res.sendStatus(404).end();
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 
 
