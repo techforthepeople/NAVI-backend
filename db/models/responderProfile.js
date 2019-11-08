@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const ResponderProfile = db.define('responderProfile', {
+const ResponderProfile = db.define('responder_profile', {
   responderType: {
     type: Sequelize.STRING
   },
