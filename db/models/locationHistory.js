@@ -10,4 +10,4 @@ const LocationHistory = db.define('location_history', {
   }
 })
 
-export default LocationHistory
+module.exports = LocationHistory

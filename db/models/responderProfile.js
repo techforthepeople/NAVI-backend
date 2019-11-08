@@ -22,4 +22,4 @@ const ResponderProfile = db.define('responder_profile', {
   }
 })
 
-export default ResponderProfile
+module.exports = ResponderProfile

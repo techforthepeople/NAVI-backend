@@ -21,9 +21,6 @@ const User = db.define('user', {
   sensorId: {
     type: Sequelize.STRING,
   },
-  group: {
-    type: Sequelize.STRING,
-  }
 })
 
-export default User
+module.exports = User
