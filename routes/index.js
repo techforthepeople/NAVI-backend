@@ -15,6 +15,24 @@ router.get('/users', function (req, res, next) {
   }
 });
 
+router.post('/users', async (req, res, next) => {
+  try {
+    const user = User.create(req.body);
+    if (user) {
+      res.status(201).send("user created.");
+    } else {
+      res.status(500).send("User could not be created.")
+    }
+  } catch (err) {
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      res.status(401).send('User already exists')
+    } else {
+      next(err)
+    }
+    next(err)
+  }
+})
+
 router.get('/users/:id', function(req, res, next) {
   try {
     const userId = req.params.id;
