@@ -5,9 +5,9 @@ const ResponderProfile = require('../db/models/responderProfile')
 
 
 
-router.get('/', function (req, res, next) {
+router.get('/', async (req, res, next) => {
   try {
-    const users = User.findAll();
+    const users = await User.findAll();
     res.json(users);
   } catch (err) {
     next(err);
