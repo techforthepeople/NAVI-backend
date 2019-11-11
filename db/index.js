@@ -29,4 +29,12 @@ User.belongsToMany(Alert, {through: 'UserToAlert'})
 
 
 
-module.exports = db
+module.exports = {
+    db,
+    User,
+    Alert,
+    Group,
+    LocationHistory,
+    ResponderProfile,
+    SensorData,
+}
