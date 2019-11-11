@@ -5,7 +5,6 @@ const User = db.define('user', {
   authId: {
     type: Sequelize.STRING,
     unique:true,
-    allowNull:false,
     primaryKey:true,
   },
   email: {
