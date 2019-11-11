@@ -11,7 +11,7 @@ const db = require('./db')
 Group.hasMany(User)
 User.belongsTo(Group)
 
-User.hasOne(SensorData)
+User.hasMany(SensorData)
 SensorData.belongsTo(User)
 
 User.hasOne(ResponderProfile)
