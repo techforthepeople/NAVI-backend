@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var db = require('./db')
+var { db } = require('./db')
 var sensorRouter = require('./routes/sensor_logs');
 var usersRouter = require('./routes/users');
 
@@ -32,10 +32,11 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-const syncDb = () => db.sync()
+const syncDb = () =>  db.sync({force: true})
 
 const bootApp = async () => {
   await syncDb()
+  console.log("Connected DB!")
 }
 
 bootApp()
