@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var db = require('./db')
+var { db } = require('./db')
 var sensorRouter = require('./routes/sensor_logs');
 var usersRouter = require('./routes/users');
+var locationRouter = require('./routes/location')
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/sensors', sensorRouter);
 app.use('/users', usersRouter);
+app.use('/location', locationRouter); 
 
 /* GET home page. */
 app.get('/', function (req, res, next) {
@@ -32,10 +34,11 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-const syncDb = () => db.sync()
+const syncDb = () =>  db.sync({force: true})
 
 const bootApp = async () => {
   await syncDb()
+  console.log("Connected DB!")
 }
 
 bootApp()
