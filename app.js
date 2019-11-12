@@ -6,6 +6,7 @@ var logger = require('morgan');
 var { db } = require('./db')
 var sensorRouter = require('./routes/sensor_logs');
 var usersRouter = require('./routes/users');
+var locationRouter = require('./routes/location')
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/sensors', sensorRouter);
 app.use('/users', usersRouter);
+app.use('/location', locationRouter); 
 
 /* GET home page. */
 app.get('/', function (req, res, next) {

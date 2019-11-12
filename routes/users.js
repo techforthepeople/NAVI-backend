@@ -8,9 +8,7 @@ const locationHistory = require('../db/models/locationHistory')
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      include: [{model: locationHistory}]
-    });
+    const users = await User.findAll();
     res.json(users);
   } catch (err) {
     next(err);
@@ -67,6 +65,15 @@ router.put('/:id/updatehealth', async (req, res, next) => {
   }
 })
 
+//Add route to update location of user
+router.get('/:id/location', async (req, res, next) => {
+  try {
+    const getUser = await User.findByPk(req.params.id)
+    console.log(getUser)
+  } catch (err) {
+    next(err)
+  }
+})
 
 
 module.exports = router;
