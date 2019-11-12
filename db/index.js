@@ -6,8 +6,6 @@ const SensorData = require("./models/sensorData.js")
 const User = require("./models/user.js")
 const db = require('./db')
 
-
-
 Group.hasMany(User)
 User.belongsTo(Group)
 
@@ -21,13 +19,6 @@ User.hasMany(LocationHistory)
 LocationHistory.belongsTo(User)
 
 User.belongsToMany(Alert, {through: 'UserToAlert'})
-
-
-
-
-
-
-
 
 module.exports = {
     db,
