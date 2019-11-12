@@ -3,10 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var { db } = require('./db')
+var { db } = require('./db');
 var sensorRouter = require('./routes/sensor_logs');
 var usersRouter = require('./routes/users');
-var locationRouter = require('./routes/location')
+var locationRouter = require('./routes/location');
+var messagesRouter = require('./routes/messages');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/sensors', sensorRouter);
 app.use('/users', usersRouter);
 app.use('/location', locationRouter); 
+app.use('/messages', messagesRouter)
 
 /* GET home page. */
 app.get('/', function (req, res, next) {
