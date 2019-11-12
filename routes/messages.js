@@ -4,7 +4,7 @@ var MessageData = require("../db/models/messageData");
 
 router.get("/", async (req, res, next) => {
   try {
-    const allMessageData = await MessageData.findAll({ order: '"updatedAt" DESC' });
+    const allMessageData = await MessageData.findAll({ order: [['updatedAt', 'DESC']] });
     if (allMessageData) {
       res.json(allMessageData);
     } else {
