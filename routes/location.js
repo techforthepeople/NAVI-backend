@@ -5,7 +5,7 @@ const ResponderProfile = require('../db/models/responderProfile')
 const locationHistory = require('../db/models/locationHistory')
 
 
-//Get recent location from all users
+//Get recent location from all Users Eager Load on LocationHistory 
 router.get('/', async (req, res, next) => {
     try {
       const users = await User.findAll({
@@ -16,3 +16,19 @@ router.get('/', async (req, res, next) => {
       next(err);
     }
   });
+
+  //Update the location of a User
+  router.post('/:id/', async (req, res, next) => {
+      try {
+          const newLocation = await locationHistory.create({
+              userAuthId: req.params.id,
+              lat: req.body.lat,
+              long: req.body.long
+          });
+          res.json(newLocation)
+      } catch(err) {
+          next(err)
+      }
+  })
+
+  module.exports = router
