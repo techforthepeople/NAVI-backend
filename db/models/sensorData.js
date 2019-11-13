@@ -19,3 +19,4 @@ const SensorData = db.define('sensor_data', {
 })
 
 module.exports = SensorData
+

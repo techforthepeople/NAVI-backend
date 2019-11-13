@@ -2,6 +2,47 @@
 const {db} = require('../db')
 const { User } = require('../db')
 
+const { LocationHistory } = require('./db/index');
+const {SensorData} = require('./db/index')
+
+const respondersLocation = [
+    {
+        userAuthId: 'user1',
+        lat: 41.4999275,
+        long: -123.1622268,
+    },
+    {
+        userAuthId: 'user1',
+        lat: 40.8370254,
+        long: -121.5605029
+    },
+    {
+        userAuthId: 'user2',
+        lat: 41.2672431,
+        long: -122.4252902,
+    },
+    {
+        userAuthId: 'user2',
+        lat: 41.4101294,
+        long: -123.2591138,
+    },
+]
+
+const sensorLogs = [{
+    timeLogged: Date.now() - 15,
+    pressure: 80.5,
+    humidity: 80,
+    temperature: 90,
+    userAuthId: 'user1'
+},
+    {
+        timeLogged: Date.now() + 15,
+        pressure: 60,
+        humidity: 100,
+        temperature: 70,
+        userAuthId: 'user2'
+    }]
+
 async function seed() {
     await db.sync({ force: true })
     console.log('db synced!')
@@ -10,6 +51,18 @@ async function seed() {
         User.create({ email: 'cody@email.com', authId: 'user1' }),
         User.create({ email: 'murphy@email.com', authId: 'user2' })
     ])
+
+    await Promise.all(
+        respondersLocation.map(pin => {
+            return LocationHistory.create(pin);
+        })
+    );
+
+    await Promise.all(
+        sensorLogs.map(sensorLog => {
+            return SensorData.create(sensorLog);
+        })
+    );
 
     console.log(`seeded ${users.length} users`)
     console.log(`seeded successfully`)
