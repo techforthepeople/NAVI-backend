@@ -21,8 +21,8 @@ router.get('/', async (req, res, next) => {
       try {
           const newLocation = await locationHistory.create({
               userAuthId: req.params.id,
-              lat: req.body.lat,
-              long: req.body.long
+              lat: req.body.latitude,
+              long: req.body.longitude
           });
           res.json(newLocation)
       } catch(err) {
