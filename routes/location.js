@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../db/models/user')
-const ResponderProfile = require('../db/models/responderProfile')
 const locationHistory = require('../db/models/locationHistory')
 
 
@@ -9,7 +8,7 @@ const locationHistory = require('../db/models/locationHistory')
 router.get('/', async (req, res, next) => {
     try {
       const users = await User.findAll({
-        include: [{model: locationHistory}, {model: ResponderProfile}]
+        include: [{model: locationHistory}]
       });
       res.json(users);
     } catch (err) {
