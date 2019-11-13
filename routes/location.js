@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../db/models/user')
+const ResponderProfile = require('../db/models/responderProfile')
 const locationHistory = require('../db/models/locationHistory')
 
 
@@ -8,7 +9,7 @@ const locationHistory = require('../db/models/locationHistory')
 router.get('/', async (req, res, next) => {
     try {
       const users = await User.findAll({
-        include: [{model: locationHistory}]
+        include: [{model: locationHistory}, {model: ResponderProfile}]
       });
       res.json(users);
     } catch (err) {
@@ -21,8 +22,8 @@ router.get('/', async (req, res, next) => {
       try {
           const newLocation = await locationHistory.create({
               userAuthId: req.params.id,
-              lat: req.body.lat,
-              long: req.body.long
+              lat: req.body.latitude,
+              long: req.body.longitude
           });
           res.json(newLocation)
       } catch(err) {
