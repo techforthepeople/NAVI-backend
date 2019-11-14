@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var SensorData = require('../db/models/sensorData')
+var {SensorData} = require('../db/index')
 
 
 router.get('/', async(req, res, next) => {

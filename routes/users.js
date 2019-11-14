@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const User = require('../db/models/user')
-const ResponderProfile = require('../db/models/responderProfile')
-const locationHistory = require('../db/models/locationHistory')
+const { User } = require('../db/index')
+const { ResponderProfile } = require('../db/index')
+const {LocationHistory} = require('../db/index')
 
 
 
