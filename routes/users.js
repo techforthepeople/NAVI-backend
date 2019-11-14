@@ -62,7 +62,7 @@ router.post('/:id/updatehealth', async (req, res, next) => {
 
     console.log(userData)
     await userData[0].update({
-      dob: req.body.dob, 
+      dob: req.body.age, 
       weight: req.body.weight, 
       height: req.body.height,
       heartRate: req.body.heartRate
