@@ -15,6 +15,9 @@ const MessageData = db.define('message_data', {
   },
   priority: {
     type: Sequelize.TEXT
+  },
+  tone: {
+    type: Sequelize.JSON
   }
 
 })

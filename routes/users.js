@@ -8,7 +8,9 @@ const {LocationHistory} = require('../db/index')
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      include: [{model: ResponderProfile}]
+    });
     res.json(users);
   } catch (err) {
     next(err);
@@ -49,13 +51,24 @@ router.get('/:id', function(req, res, next) {
   }
 });
 
-router.put('/:id/updatehealth', async (req, res, next) => {
+router.post('/:id/updatehealth', async (req, res, next) => {
   try {
-    const newUserData = await ResponderProfile.update(
-      { heartRate: req.body.heartRate },
-      { where: req.params.id }
-    )
-    if (newUserData) {
+
+
+
+    const userData = await ResponderProfile.findOrCreate({
+      where: {userAuthId: req.params.id},
+    })
+
+    console.log(userData)
+    await userData[0].update({
+      dob: req.body.age, 
+      weight: req.body.weight, 
+      height: req.body.height,
+      heartRate: req.body.heartRate
+    })
+
+    if (userData) {
       res.sendStatus(201).json(user);
     } else {
       res.sendStatus(404).end();
