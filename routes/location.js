@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router();
 const User = require('../db/models/user')
 const locationHistory = require('../db/models/locationHistory')
+const ResponderProfile = require('../db/models/responderProfile')
+
 
 
 //Get recent location from all Users Eager Load on LocationHistory 
 router.get('/', async (req, res, next) => {
     try {
       const users = await User.findAll({
-        include: [{model: locationHistory}]
+        include: [{model: locationHistory}, {model: ResponderProfile}]
       });
       res.json(users);
     } catch (err) {
