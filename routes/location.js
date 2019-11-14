@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const User = require('../db/models/user')
-const locationHistory = require('../db/models/locationHistory')
-const ResponderProfile = require('../db/models/responderProfile')
+const {User} = require('../db/index')
+const { LocationHistory } = require('../db/index')
+const { ResponderProfile } = require('../db/index')
 
 
 
@@ -10,7 +10,7 @@ const ResponderProfile = require('../db/models/responderProfile')
 router.get('/', async (req, res, next) => {
     try {
       const users = await User.findAll({
-        include: [{model: locationHistory}, {model: ResponderProfile}]
+        include: [{model: LocationHistory}, {model: ResponderProfile}]
       });
       res.json(users);
     } catch (err) {
@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
   //Update the location of a User
   router.post('/:id/', async (req, res, next) => {
       try {
-          const newLocation = await locationHistory.create({
+          const newLocation = await LocationHistory.create({
               userAuthId: req.params.id,
               lat: req.body.latitude,
               long: req.body.longitude

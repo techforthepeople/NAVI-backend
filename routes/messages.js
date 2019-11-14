@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var MessageData = require("../db/models/messageData");
+var { MessageData } = require('../db/index')
 
 router.get("/", async (req, res, next) => {
   try {

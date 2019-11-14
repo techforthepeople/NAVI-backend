@@ -1,0 +1,1 @@
+process.env.DATABASE_URL = `postgres://localhost:5432/solidarity_backend`

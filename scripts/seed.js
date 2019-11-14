@@ -2,30 +2,48 @@
 const {db} = require('../db')
 const { User } = require('../db')
 
-const { LocationHistory } = require('./db/index');
-const {SensorData} = require('./db/index')
+const { LocationHistory } = require('../db/index');
+const {SensorData} = require('../db/index')
+const {ResponderProfile} = require('../db/index')
 
 const respondersLocation = [
     {
         userAuthId: 'user1',
-        lat: 41.4999275,
-        long: -123.1622268,
+        lat: 37.68,
+        long: -122.45,
     },
     {
         userAuthId: 'user1',
-        lat: 40.8370254,
-        long: -121.5605029
+        lat: 37.780002,
+        long: -122.450001
     },
     {
         userAuthId: 'user2',
-        lat: 41.2672431,
-        long: -122.4252902,
+        lat: 37.780002,
+        long: -122.450001,
     },
     {
         userAuthId: 'user2',
-        lat: 41.4101294,
-        long: -123.2591138,
+        lat: 37.68,
+        long: -122.45,
     },
+]
+
+const responderProfiles = [
+    {
+        userAuthId: 'user1',
+        dob: 27,
+        weight: 150,
+        height: 107,
+        heartRate: 101
+    },
+    {
+        userAuthId: 'user2',
+        dob: 27,
+        weight: 150,
+        height: 107,
+        heartRate: 101
+    }
 ]
 
 const sensorLogs = [{
@@ -55,6 +73,12 @@ async function seed() {
     await Promise.all(
         respondersLocation.map(pin => {
             return LocationHistory.create(pin);
+        })
+    );
+
+    await Promise.all(
+        responderProfiles.map(prof => {
+            return ResponderProfile.create(prof);
         })
     );
 

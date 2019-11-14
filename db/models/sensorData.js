@@ -3,7 +3,7 @@ const db = require('../db')
 
 const SensorData = db.define('sensor_data', {
   timeLogged: {
-    type: Sequelize.TIME,
+    type: Sequelize.DATE,
     unique: true,
     allowNull: false
   },
