@@ -2,8 +2,8 @@
 const {db} = require('../db')
 const { User } = require('../db')
 
-const { LocationHistory } = require('./db/index');
-const {SensorData} = require('./db/index')
+const { LocationHistory } = require('../db/index');
+const {SensorData} = require('../db/index')
 
 const respondersLocation = [
     {
@@ -28,15 +28,17 @@ const respondersLocation = [
     },
 ]
 
+const moment = require('moment')
+
 const sensorLogs = [{
-    timeLogged: Date.now() - 15,
+    timeLogged: Date.now() + 60000,
     pressure: 80.5,
     humidity: 80,
     temperature: 90,
     userAuthId: 'user1'
 },
     {
-        timeLogged: Date.now() + 15,
+        timeLogged: Date.now() + 120000,
         pressure: 60,
         humidity: 100,
         temperature: 70,
