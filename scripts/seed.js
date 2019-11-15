@@ -9,23 +9,23 @@ const {ResponderProfile} = require('../db/index')
 const respondersLocation = [
     {
         userAuthId: 'user1',
-        lat: 37.68,
-        long: -122.45,
+        lat: 37.7868743,
+        long: -122.4055773,
     },
     {
         userAuthId: 'user1',
-        lat: 37.780002,
-        long: -122.450001
+        lat: 37.7865709,
+        long: -122.4076033
     },
     {
         userAuthId: 'user2',
-        lat: 37.780002,
-        long: -122.450001,
+        lat: 37.7855014,
+        long: -122.4072872,
     },
     {
         userAuthId: 'user2',
-        lat: 37.68,
-        long: -122.45,
+        lat: 37.7853619,
+        long: -122.4092254,
     },
 ]
 
