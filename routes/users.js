@@ -8,7 +8,7 @@ const { ResponderProfile } = require('../db/index')
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      include: [{model: ResponderProfile}]
+      include: [{model: ResponderProfile, model: LocationHistory}]
     });
     res.json(users);
   } catch (err) {
