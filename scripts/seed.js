@@ -13,20 +13,25 @@ const respondersLocation = [
         long: -122.4055773,
     },
     {
-        userAuthId: 'user1',
+        userAuthId: 'user2',
         lat: 37.7865709,
         long: -122.4076033
     },
     {
-        userAuthId: 'user2',
+        userAuthId: 'user3',
         lat: 37.7855014,
         long: -122.4072872,
     },
     {
-        userAuthId: 'user2',
+        userAuthId: 'user4',
         lat: 37.7853619,
         long: -122.4092254,
     },
+    {
+        userAuthId: 'user5',
+        lat: 37.7853640,
+        long: -122.4092280,
+    }
 ]
 
 const responderProfiles = [
@@ -39,9 +44,30 @@ const responderProfiles = [
     },
     {
         userAuthId: 'user2',
-        dob: 27,
+        dob: 30,
         weight: 150,
-        height: 107,
+        height: 147,
+        heartRate: 102
+    },
+    {
+        userAuthId: 'user3',
+        dob: 45,
+        weight: 187,
+        height: 150,
+        heartRate: 101
+    },
+    {
+        userAuthId: 'user4',
+        dob: 33,
+        weight: 190,
+        height: 160,
+        heartRate: 99
+    },
+    {
+        userAuthId: 'user5',
+        dob: 35,
+        weight: 192,
+        height: 140,
         heartRate: 101
     }
 ]
@@ -66,8 +92,11 @@ async function seed() {
     console.log('db synced!')
 
     const users = await Promise.all([
-        User.create({ email: 'cody@email.com', authId: 'user1', firstName: 'Edward', lastName: 'Schiff' }),
-        User.create({ email: 'murphy@email.com', authId: 'user2', firstName: 'Jessa', lastName: 'Thompson' })
+        User.create({ email: 'e.schiff@fire.com', authId: 'user1', firstName: 'Edward', lastName: 'Schiff' }),
+        User.create({ email: 'j.thompson@ems.com', authId: 'user2', firstName: 'Jessa', lastName: 'Thompson' }),
+        User.create({ email: 'j.bryer@ems.com', authId: 'user3', firstName: 'John', lastName: 'Bryer' }),
+        User.create({ email: 'f.davidson@ems.com', authId: 'user4', firstName: 'Fara', lastName: 'Davidson' }),
+        User.create({ email: 'd.edwards@ems.com', authId: 'user5', firstName: 'David', lastName: 'Edwards' }),
     ])
 
     await Promise.all(
