@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { User } = require('../db/index')
 const { ResponderProfile } = require('../db/index')
+const {LocationHistory} = require('../db/index')
 
 
 
