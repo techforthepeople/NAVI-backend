@@ -14,7 +14,7 @@ var cors = require('cors')
 var app = express();
 
 var corsOptions = {
-  origin: 'https://solidarity-backend-030.onrender.com',
+  origin: 'https://solidarity.onrender.com',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
