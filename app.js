@@ -8,8 +8,18 @@ var sensorRouter = require('./routes/sensor_logs');
 var usersRouter = require('./routes/users');
 var locationRouter = require('./routes/location');
 var messagesRouter = require('./routes/messages');
+var cors = require('cors')
+
 
 var app = express();
+
+var corsOptions = {
+  origin: 'https://solidarity-backend-030.onrender.com',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.use(cors(corsOptions))
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +50,7 @@ const syncDb = () =>  db.sync({force: true})
 
 const bootApp = async () => {
   await syncDb()
+  require('child_process').fork('./scripts/seed.js')
   console.log("Connected DB!")
 }
 
